@@ -1669,3 +1669,44 @@ footer {
   }
 
 }
+.type-card i{
+    width:38px;
+    height:38px;
+    stroke-width:2;
+    margin-bottom:12px;
+}
+
+.type-card.active i{
+    color:#fff;
+}
+
+.type-card:not(.active) i{
+    color:#10265F;
+}
+
+.type-btn{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.type-icon{
+    width:36px;
+    height:36px;
+    stroke-width:2;
+}
+
+.type-btn.active .type-icon{
+    color:#fff;
+}
+
+.type-btn:not(.active) .type-icon{
+    color:#10265F;
+}
+
+.type-btn span{
+    font-size:30px;
+    font-weight:700;
+}
