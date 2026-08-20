@@ -1,8 +1,32 @@
 const data={
 types:[
-{id:"imovel",label:"Imóvel",icon:"⌂",min:80000,max:900000,step:5000,prazos:[120,150,180,200]},
-{id:"auto",label:"Automóvel",icon:"🚗",min:30000,max:250000,step:2000,prazos:[48,60,72,80]},
-{id:"moto",label:"Moto",icon:"🏍",min:8000,max:60000,step:1000,prazos:[36,48,60]}
+{
+id:"imovel",
+label:"Imóvel",
+icon:"house",
+min:80000,
+max:900000,
+step:5000,
+prazos:[120,150,180,200]
+},
+{
+id:"auto",
+label:"Automóvel",
+icon:"car-front",
+min:30000,
+max:250000,
+step:2000,
+prazos:[48,60,72,80]
+},
+{
+id:"moto",
+label:"Moto",
+icon:"bike",
+min:8000,
+max:60000,
+step:1000,
+prazos:[36,48,60]
+}
 ],
 steps:[["01","⌕","Escolha o crédito","Imóvel, automóvel ou moto."],["02","◎","Faça sua simulação","Valor e prazo sob medida."],["03","☎","Receba atendimento","Consultoria especializada."],["04","♙","Entre no grupo","Formalização simples e rápida."],["05","★","Seja contemplado","Por sorteio ou lance."],["06","✦","Realize seu sonho","Retire seu bem sem juros."]],
 benefits:[["✓","Sem juros","Você paga apenas correção monetária e taxa de administração."],["▣","Parcelas acessíveis","Planos que cabem no seu orçamento mensal."],["↗","Planejamento financeiro","Organize sua conquista com previsibilidade total."],["★","Contemplação por lance","Antecipe seu bem com estratégias de lance."],["♢","Consultoria especializada","Time dedicado a encontrar o melhor plano para você."],["☎","Atendimento personalizado","Suporte humano do início até a contemplação."]],
@@ -25,7 +49,14 @@ const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFr
 const $=s=>document.querySelector(s);
 
 function renderTypes(){
- $("#types").innerHTML=data.types.map(t=>`<button class="type-btn ${t.id===selected?"active":""}" data-type="${t.id}"><span>${t.icon}</span><br>${t.label}</button>`).join("");
+$("#types").innerHTML = data.types.map(t => `
+<button class="type-btn ${t.id===selected ? "active" : ""}" data-type="${t.id}">
+    <i data-lucide="${t.icon}" class="type-icon"></i>
+    <span>${t.label}</span>
+</button>
+`).join("");
+
+lucide.createIcons();
  document.querySelectorAll("[data-type]").forEach(b=>b.onclick=()=>{selected=b.dataset.type;let t=data.types.find(x=>x.id===selected);value=Math.round((t.min+t.max)/2);term=t.prazos[Math.floor(t.prazos.length/2)];renderSimulation()});
 }
 function renderSimulation(){
